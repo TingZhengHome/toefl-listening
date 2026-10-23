@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TING'S ENGLISH LAB ｜ 托福 28+ 學術聽力旗艦原聲音檔總庫</title>
+    <style>
+        :root {
+            --primary-navy: #0F172A;
+            --secondary-navy: #1E293B;
+            --accent-blue: #0284C7;
+            --accent-sky: #0369A1;
+            --bg-light: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --highlight-red: #DC2626;
+            --highlight-green: #16A34A;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background: var(--bg-light); color: var(--text-main); line-height: 1.6; }
+        
+        /* Top Navigation Header */
+        header { background: var(--primary-navy); color: #fff; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.12); position: sticky; top: 0; z-index: 100; }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .brand-logo-icon { width: 32px; height: 32px; background: #0284C7; color: #fff; border-radius: 6px; font-size: 1.25rem; font-weight: 900; line-height: 32px; text-align: center; font-family: "Georgia", serif; }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-title { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.5px; }
+        .brand-sub { font-size: 0.78rem; color: #94A3B8; margin-top: 1px; }
+        .badge { background: #0284C7; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px; }
+
+        /* Main Container */
+        .app-container { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 66px); }
+        @media (max-width: 960px) { .app-container { grid-template-columns: 1fr; } }
+
+        /* Left Sidebar Unit List */
+        .sidebar { background: #fff; border-right: 1px solid var(--border-color); overflow-y: auto; max-height: calc(100vh - 66px); padding: 16px; }
+        .sidebar-title { font-size: 0.82rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800; margin-bottom: 12px; letter-spacing: 0.5px; }
+        .unit-card { padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 10px; cursor: pointer; transition: all 0.2s ease; background: #fff; }
+        .unit-card:hover { border-color: var(--accent-blue); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .unit-card.active { border-color: var(--accent-blue); background: #F0F9FF; border-left: 4px solid var(--accent-blue); }
+        .unit-tag { font-size: 0.72rem; font-weight: 700; color: var(--accent-blue); }
+        .unit-name { font-size: 0.88rem; font-weight: 700; color: var(--primary-navy); margin: 3px 0; }
+        .unit-meta { font-size: 0.75rem; color: var(--text-muted); }
+
+        /* Main Player & Content Area */
+        .content-area { padding: 24px; overflow-y: auto; max-height: calc(100vh - 66px); }
+        
+        /* Persistent Audio Player Bar */
+        .player-bar { background: #fff; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .player-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+        .current-title { font-size: 1.25rem; font-weight: 800; color: var(--primary-navy); }
+        .current-speaker { font-size: 0.85rem; color: var(--text-muted); margin-top: 3px; }
+        
+        /* Audio Controls */
+        .controls-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+        .btn-ctrl { background: var(--primary-navy); color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; transition: transform 0.1s, background 0.2s; }
+        .btn-ctrl:hover { transform: scale(1.05); background: var(--accent-sky); }
+        .btn-sec { background: var(--bg-light); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 6px; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+        .btn-sec:hover { background: #E2E8F0; }
+        .speed-select { padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.8rem; font-weight: 600; color: var(--primary-navy); background: #fff; cursor: pointer; }
+        
+        /* Timeline */
+        .timeline-container { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .time-text { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); min-width: 42px; }
+        .scrubber { flex: 1; height: 6px; border-radius: 3px; background: #E2E8F0; outline: none; -webkit-appearance: none; cursor: pointer; }
+        .scrubber::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--accent-blue); cursor: pointer; }
+
+        /* QR Code & Mobile Box */
+        .qr-section { display: flex; align-items: center; gap: 16px; background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 16px; }
+        .qr-img { width: 68px; height: 68px; border-radius: 4px; border: 1px solid #CBD5E1; background: #fff; }
+        .qr-text { font-size: 0.82rem; color: var(--text-muted); }
+        .qr-highlight { font-weight: 700; color: var(--primary-navy); margin-bottom: 2px; }
+        .qr-link { color: var(--accent-blue); text-decoration: none; word-break: break-all; font-weight: 600; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 6px; border-bottom: 2px solid var(--border-color); margin-bottom: 20px; overflow-x: auto; }
+        .tab-btn { padding: 10px 16px; border: none; background: none; font-size: 0.88rem; font-weight: 700; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; }
+        .tab-btn.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+
+        /* Content Panes */
+        .tab-pane { display: none; background: #fff; border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .tab-pane.active { display: block; }
+        
+        .script-section { margin-bottom: 20px; }
+        .script-sec-title { font-size: 0.95rem; font-weight: 700; color: var(--accent-sky); margin-bottom: 6px; }
+        .script-sec-text { font-size: 0.92rem; color: #334155; line-height: 1.7; text-align: justify; }
+
+        .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        @media (max-width: 680px) { .notes-grid { grid-template-columns: 1fr; } }
+        .notes-card { background: #F8FAFC; border: 1px solid var(--border-color); border-left: 3.5px solid var(--accent-blue); border-radius: 6px; padding: 12px; font-size: 0.85rem; }
+        .notes-card-title { font-weight: 700; color: var(--primary-navy); margin-bottom: 4px; }
+
+        .q-card { background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .q-title { font-weight: 700; font-size: 0.92rem; color: var(--primary-navy); margin-bottom: 10px; }
+        .q-type-badge { display: inline-block; background: #E0F2FE; color: var(--accent-sky); font-size: 0.75rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-right: 6px; }
+        .opt-item { padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 6px; cursor: pointer; font-size: 0.88rem; transition: all 0.15s; background: #fff; }
+        .opt-item:hover { border-color: var(--accent-blue); background: #F0F9FF; }
+        .opt-item.correct { background: #DCFCE7; border-color: #22C55E; color: #15803D; font-weight: 700; }
+        .opt-item.incorrect { background: #FEE2E2; border-color: #EF4444; color: #B91C1C; }
+        .ans-feedback { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 6px; font-size: 0.85rem; line-height: 1.5; background: #F0F9FF; border-left: 3px solid var(--accent-blue); }
+        
+        .ans-card { background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 16px; margin-bottom: 14px; border-left: 4px solid var(--highlight-red); }
+        .ans-pill { display: inline-block; background: #FEE2E2; color: #991B1B; font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; margin-right: 6px; }
+        
+        table.matrix-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
+        table.matrix-table th { background: var(--primary-navy); color: #fff; padding: 8px 12px; text-align: left; }
+        table.matrix-table td { padding: 8px 12px; border: 1px solid var(--border-color); }
+        
+        .formula-box { background: #F0F9FF; border: 1px solid #BAE6FD; border-left: 4px solid var(--accent-blue); padding: 14px; border-radius: 6px; margin-bottom: 14px; font-size: 0.88rem; }
+        .formula-tag { font-weight: 700; color: var(--accent-sky); margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <div class="brand-logo-icon">T</div>
+        <div class="brand-text">
+            <span class="brand-title">TING'S ENGLISH LAB 廷暉英語認知工坊</span>
+            <span class="brand-sub">托福 28+ 學術聽力破局階梯 ‧ 認知負荷工程原聲音檔總庫</span>
+        </div>
+    </div>
+    <div class="badge">Scaled Score 28+ 聽力實戰音庫</div>
+</header>
+
+<div class="app-container">
+    <!-- Left Sidebar: Unit Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-title">課程單元目錄（10 大跨學科領域）</div>
+        <div id="unitList"></div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+        <!-- Persistent Audio Player Bar -->
+        <div class="player-bar">
+            <div class="player-header">
+                <div>
+                    <div id="dispTitle" class="current-title">載入中...</div>
+                    <div id="dispSpeaker" class="current-speaker">演講者配置中...</div>
+                </div>
+                <div>
+                    <select id="speedSelect" class="speed-select" onchange="changeSpeed(this.value)">
+                        <option value="0.8">0.8x 精聽跟讀</option>
+                        <option value="1.0" selected>1.0x 考場標準</option>
+                        <option value="1.1">1.1x 壓力競速</option>
+                        <option value="1.25">1.25x 提速極限</option>
+                    </select>
+                </div>
+            </div>
+
+            <audio id="audioPlayer" preload="auto" ontimeupdate="updateProgress()" onended="onAudioEnded()"></audio>
+
+            <div class="controls-row">
+                <button class="btn-ctrl" onclick="togglePlay()" id="playBtn">▶</button>
+                <button class="btn-sec" onclick="skipTime(-10)">⏪ 10秒</button>
+                <button class="btn-sec" onclick="skipTime(10)">⏩ 10秒</button>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">快速跳轉章節：</div>
+                <button class="btn-sec" onclick="jumpTo(0)">Sec 1</button>
+                <button class="btn-sec" onclick="jumpTo(55)">Sec 2</button>
+                <button class="btn-sec" onclick="jumpTo(125)">Sec 3</button>
+                <button class="btn-sec" onclick="jumpTo(180)">Sec 4</button>
+                <button class="btn-sec" onclick="jumpTo(230)">Sec 5</button>
+            </div>
+
+            <div class="timeline-container">
+                <span id="currentTime" class="time-text">0:00</span>
+                <input type="range" id="scrubber" class="scrubber" value="0" min="0" max="100" oninput="seekAudio(this.value)">
+                <span id="totalTime" class="time-text">0:00</span>
+            </div>
+
+            <div class="qr-section">
+                <img id="qrDisplay" class="qr-img" src="" alt="Unit QR Code">
+                <div class="qr-text">
+                    <div class="qr-highlight">📱 每個單元專屬 QR 碼直達音檔</div>
+                    <div>用手機掃描本單元專屬 QR Code，或直接分享連結：<br><a id="qrDirectLink" class="qr-link" href="#" target="_blank"></a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('testPane', this)">1. 測驗題目與筆記導航</button>
+            <button class="tab-btn" onclick="switchTab('scriptPane', this)">2. 官方原聲逐字稿</button>
+            <button class="tab-btn" onclick="switchTab('transPane', this)">3. 全文逐段繁中精翻</button>
+            <button class="tab-btn" onclick="switchTab('ansPane', this)">4. 考點定位手術刀</button>
+            <button class="tab-btn" onclick="switchTab('vocabPane', this)">5. 詞彙與同義映射</button>
+            <button class="tab-btn" onclick="switchTab('formulaPane', this)">6. 長難句與輸出公式</button>
+        </div>
+
+        <!-- Tab 1: Test Pane -->
+        <div id="testPane" class="tab-pane active">
+            <h3 style="margin-bottom: 12px; color: var(--primary-navy);">Lecture Structural Note-Taking Scaffold (結構化康乃爾筆記導航)</h3>
+            <div id="dispScaffold" class="notes-grid"></div>
+            
+            <h3 style="margin: 20px 0 12px 0; color: var(--primary-navy);">Listening Comprehension Questions (Questions 1–6 全真線上交互作答)</h3>
+            <div id="dispQuestions"></div>
+        </div>
+
+        <!-- Tab 2: Script Pane -->
+        <div id="scriptPane" class="tab-pane">
+            <h3 style="margin-bottom: 12px; color: var(--primary-navy);">Academic Lecture Audio Script ‧ 官方原聲逐字稿</h3>
+            <div id="dispScript"></div>
+        </div>
+
+        <!-- Tab 3: Trans Pane -->
+        <div id="transPane" class="tab-pane">
+            <h3 style="margin-bottom: 12px; color: var(--primary-navy);">全文逐段繁中精翻</h3>
+            <div id="dispTranslation"></div>
+        </div>
+
+        <!-- Tab 4: Ans Pane -->
+        <div id="ansPane" class="tab-pane">
+            <h3 style="margin-bottom: 12px; color: var(--primary-navy);">題目詳解與聽力考點定位手術刀 (Answer Key & Textual Analysis)</h3>
+            <div id="dispAnswers"></div>
+        </div>
+
+        <!-- Tab 5: Vocab Pane -->
+        <div id="vocabPane" class="tab-pane">
+            <h3 style="margin-bottom: 12px; color: var(--primary-navy);">高階學術聽力詞彙檢核表 ＆ 考官同義替換映射矩陣</h3>
+            <div id="dispVocab"></div>
+            <div id="dispMatrix" style="margin-top: 24px;"></div>
+        </div>
+
+        <!-- Tab 6: Formula Pane -->
+        <div id="formulaPane" class="tab-pane">
+            <h3 style="margin-bottom: 12px; color: var(--primary-navy);">長難句結構拆解 ＆ 可遷移表達公式 (Speaking & Writing)</h3>
+            <div id="dispFormulas"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Complete Curriculum Data for All 10 Units
+const UNITS_DATA = [
+    {
+        unit: 1,
+        title: "The Geodynamo: Core Convection and Geomagnetic Reversals",
+        chinese: "地球發電機效應：地核對流、地磁逆轉與行星防護罩演化",
+        domain: "【第一篇章】自然科學與深地太空",
+        speaker: "Prof. Guy Sterling (Earth & Planetary Sciences)",
+        audioUrl: "audio/Unit01_The_Geodynamo.mp3",
+        qrUrl: "qr/QR_Unit01.png",
+        scaffold: [
+            { title: "1. Main Topic & Paradox", cue: "Earth's magnetic dipole NOT a permanent bar magnet (Curie point violation) → Self-sustaining geodynamo engine." },
+            { title: "2. Driving Forces", cue: "Outer core (molten Fe-Ni) convection driven by thermal cooling + compositional buoyancy (light elements expelling as inner core solidifies)." },
+            { title: "3. Coriolis Helical Flow", cue: "Planetary rotation + Coriolis force organize vertical plumes into helical columns → Induces self-amplifying magnetic field lines." },
+            { title: "4. Reversal Dynamics & Impact", cue: "Non-linear turbulence leads to dipole collapse (multipolar state) → Fossil record shows NO mass extinctions; atmosphere remains shielded." }
+        ],
+        questions: [
+            { num: 1, type: "Gist-Content", stem: "What is the lecture mainly about?", correct: "B", options: ["A. The catastrophic impact of solar radiation on prehistoric ecosystems during magnetic collapses", "B. The geophysical mechanisms that sustain Earth's magnetic field and how polarity reversals occur", "C. Technological discrepancies between ancient seafloor magnetic data and supercomputer simulations", "D. Commercial applications of magnetohydrodynamics in modern navigational navigation systems"] },
+            { num: 2, type: "Detail Information", stem: "According to the professor, what two factors interact to generate helical convective plumes in Earth's outer core?", correct: "C", options: ["A. High viscosity of molten basalt and gravitational attraction from the Moon", "B. Radioactive decay in the crust and seismic shear waves from subduction zones", "C. Compositional buoyancy from inner-core crystallization and the Coriolis force from planetary rotation", "D. Atmospheric pressure gradients and electromagnetic solar wind bombardment"] },
+            { num: 3, type: "Understanding the Function", stem: "Why does the professor say this: \"Now, before you start worrying about compasses going haywire tomorrow, let's look at the actual timescale.\"", correct: "C", options: ["A. To reprimand students for failing to complete their assigned paleomagnetism readings", "B. To alert navigators to prepare for an imminent breakdown of global satellite communication networks", "C. To prevent a common misconception by clarifying that magnetic reversals are gradual geological processes rather than overnight disasters", "D. To transition from theoretical fluid dynamics into practical laboratory safety guidelines"] },
+            { num: 4, type: "Speaker's Attitude", stem: "What is the professor's attitude toward the hypothesis that past magnetic reversals caused widespread mass biological extinctions?", correct: "B", options: ["A. Enthusiastically supportive, citing recent fossil discoveries in the deep sea", "B. Skeptical, noting that empirical paleontological records consistently fail to align with reversal events", "C. Indifferent, viewing the debate as completely irrelevant to modern geophysics", "D. Confused, admitting that current mathematical models cannot resolve the contradiction"] },
+            { num: 5, type: "Connecting Content", stem: "The professor contrasts the physical characteristics of Earth's core layers. Indicate which attributes apply to the Inner Core versus the Outer Core.", correct: "Outer: 1, 3 | Inner: 2, 4", options: ["Statement 1: Exists in a liquid state where fluid circulation actively generates the dipole field. [Outer Core]", "Statement 2: Remains a solid sphere composed predominantly of crystallized iron-nickel alloy under immense pressure. [Inner Core]", "Statement 3: Experiences helical, spiraling convective flow organized by the planet's rotation. [Outer Core]", "Statement 4: Releases latent heat and expels lighter elements into the overlying boundary layer as it freezes. [Inner Core]"] },
+            { num: 6, type: "Making Inferences", stem: "What can be inferred about Earth's magnetosphere during the transitional phase of a geomagnetic reversal?", correct: "B", options: ["A. It completely ceases to exist, leaving the terrestrial surface stripped of all upper-atmosphere ozone", "B. It transitions from a coherent dipole into a weaker, highly complex multipolar configuration with multiple regional poles", "C. It flips instantaneously within hours due to runaway solar flare disruptions", "D. It concentrates all magnetic field lines exclusively over the equatorial oceans"] }
+        ],
+        script: [
+            { sec: 1, title: "Introduction & The Geodynamo Paradigm", text: "Good afternoon, class. Today, we're diving beneath our feet—way down into the deep interior of our planet—to solve a classic geophysical puzzle: what actually generates Earth's magnetic field? [Q1] For centuries, early mariners assumed Earth had a colossal, permanent bar magnet buried at its center. But modern physics ruined that picturesque idea. Why? Because deep inside, temperatures far exceed the Curie point—roughly 570 degrees Celsius—the critical threshold above which ferromagnetic materials irreversibly lose their permanent magnetism. Yet, here we are, wrapped in a dynamic, protective magnetic shield extending tens of thousands of kilometers into space. Today, geophysicists agree: Earth operates not as a static magnet, but as a self-sustaining planetary heat engine known as the <b>geodynamo</b>." },
+            { sec: 2, title: "Fluid Dynamics: Convection and the Coriolis Force", text: "So, how does this engine work? To create a dynamo, you need three ingredients: an electrically conducting fluid, a source of convective energy, and planetary rotation. Earth's outer core fulfills all three. Situated between roughly twenty-nine hundred and fifty-one hundred kilometers below our feet, the outer core is a churning ocean of liquid iron and nickel. [Q2] Now, this molten metal is in constant, turbulent convection driven by two distinct mechanisms: thermal convection, as heat escapes into the rocky mantle, and compositional convection. As the solid inner core slowly freezes and grows, it expels lighter chemical elements—like sulfur, silicon, and oxygen—upward into the liquid outer core. That buoyant fluid rises like bubbles in boiling water. But here is the critical part: because Earth rotates on its axis, the <b>Coriolis force</b> deflects these rising buoyant plumes, twisting them into spiraling, helical columns aligned with the rotational axis. These circulating columns act like giant electrical coils, inducing self-amplifying magnetic field lines." },
+            { sec: 3, title: "Paleomagnetic Records and Reversal Anomalies", text: "Now, if the geodynamo were purely orderly, our magnetic north pole would sit permanently aligned with geographic north. But paleomagnetism—the analysis of remanent magnetization frozen in ancient basaltic lavas and marine sediments—revealed an astonishing phenomenon: Earth's magnetic polarity flips! [Q3] Now, before you start worrying about compasses going haywire tomorrow, let's look at the actual timescale. These geomagnetic reversals are not sudden, overnight switches. Over the past twenty million years, Earth has averaged a reversal roughly every two hundred to three hundred thousand years. However, our current polarity epoch, the Brunhes-Matuyama period, has held steady for roughly seven hundred and eighty thousand years. We are, geologically speaking, statistically overdue for a transition." },
+            { sec: 4, title: "Numerical Magnetohydrodynamic Simulations & Multipolar Collapse", text: "What happens during a reversal? High-performance supercomputer simulations of magnetohydrodynamics show that the geodynamo is fundamentally chaotic and non-linear. Convective eddies in the outer core occasionally generate turbulent magnetic loops that oppose the primary dipole field. When these opposing fluxes grow strong enough, the dominant dipole collapses. [Q6] But notice: the magnetic field doesn't drop to absolute zero. Instead, the dipole intensity weakens by eighty to ninety percent, degenerating into a complex <b>multipolar configuration</b>—meaning you might have multiple North and South poles scattered around the globe! This chaotic transition state lasts anywhere between one thousand and ten thousand years before a new stable dipole coalesces—often flipped one hundred and eighty degrees." },
+            { sec: 5, title: "Student Query, Biological Ramifications & Shielding Preservation", text: "Yes, Marcus, go ahead.\n\n<b>Student (Marcus):</b> \"Professor, if the dipole weakens by ninety percent during a reversal, wouldn't dangerous solar wind and cosmic radiation scorch the surface? Didn't past reversals cause catastrophic mass extinctions?\"\n\n<b>Professor:</b> \"Ah, excellent question, Marcus! [Q4] Well, that catastrophic narrative sounds exciting in apocalyptic sci-fi movies, but the empirical paleontological record simply fails to corroborate it. When evolutionary biologists cross-reference the fossil record with known paleomagnetic reversal boundaries, they find no statistically significant correlation with mass extinction episodes. Why? Two reasons. First, even in a degraded multipolar state, Earth's magnetic field still retains substantial shielding capacity, deflecting higher-energy charged particles into regional auroral belts. Second, and more importantly, our dense atmosphere—equivalent to ten meters of water or three meters of concrete in terms of radiation shielding—absorbs the vast majority of secondary ionizing radiation. Life on Earth weathered dozens of reversals over hundreds of millions of years without collapsing. [Q5] So, while modern satellite communications and power grids would certainly face engineering challenges during a multipolar transition, the biosphere itself has repeatedly proven its resilience to the turbulent rhythms of the geodynamo.\"" }
+        ],
+        translation: [
+            { sec: 1, head: "引言與地球發電機典範", text: "大家下午好。今天，我們將深入探索腳下數千公里的地球深處，去破解一個經典的地球物理學之謎：究竟是什麼力量在持續產生並維持著地球的磁場？在過去數個世紀中，早期的航海家們普遍認為，地球的核心深處埋藏著一根巨大的永久條形磁鐵。然而，現代物理學徹底顛覆了這個質樸而美麗的想法。為什麼呢？因為地球深處的高溫遠遠超過了所謂的「居里溫度點（Curie point）」——大約為攝氏 570 度——這是所有鐵磁性物質不可逆地喪失其永久磁性的臨界溫度閾值。然而，我們今天依然被一個向太空延伸數萬公里的動態行星防護罩緊密包裹著。當代地球物理學家達成共識：地球的運作方式絕非靜態磁鐵，而是一個自給自足的行星熱力學熱機，被稱為「地球發電機（geodynamo）」。" },
+            { sec: 2, head: "流體動力學：對流機制與柯氏力螺旋效應", text: "那麼，這個發電機究竟是如何運轉的？要構建一個天然的流體發電機，必須同時滿足三大要素：具備導電性的流體、驅動對流的能量源，以及行星整體的旋轉。地球的外核完美具備了這三項條件。外核位於地表以下大約 2,900 至 5,100 公里深處，是一片由熔融液態鐵與鎳所構成的洶湧海洋。這片金屬熔漿處於持續不斷的湍流對流之中，其背後受到兩種不同機制的驅動：首先是熱對流，即熱量不斷向上逸散至上覆的地函中；其次是成分對流（compositional convection）。隨著中心固態內核的緩慢冷卻與結晶生長，它會將較輕的化學元素（如硫、矽、氧等）向上排擠進入液態外核。這些帶有浮力的輕質流體宛如沸水中的氣泡般向上攀升。但最關鍵的核心在於：由於地球持續自轉，產生的「柯氏力（Coriolis force）」會強行扭偏這些上升的浮力羽流，將其組織為與自轉軸平行的螺旋柱狀流動（helical columns）。這些旋轉的導電流體柱宛如龐大的電磁線圈，進而感應並自我放大出貫穿行星的磁場線。" },
+            { sec: 3, head: "古地磁紀錄與地磁反轉異常現象", text: "如果地球發電機的運作完全井然有序，那麼我們的地磁北極將永久且精準地與地理北極重合。然而，古地磁學（paleomagnetism）——即透過測定冰封於古代玄武岩熔岩與深海沉積物中的天然剩磁紀錄——揭示了一個令人震撼的現象：地球的磁場極性會發生倒轉！在大家開始擔心明天手上的指南針會不會集體發瘋之前，讓我們先來審視其真實發生的時間尺度。這些地磁反轉絕非一夕之間突發的劇烈轉折。在過去的兩千萬年間，地球平均大約每二十萬至三十萬年發生一次完整的極性翻轉。然而，我們當前所處的布容-松山極性期（Brunhes-Matuyama chron），已經持續了約七十八萬年之久。從純粹的地質統計學角度而言，我們實際上已經嚴重「逾期」了。" },
+            { sec: 4, head: "數值磁流體模擬與多極態崩潰過程", text: "在漫長的反轉過程中，地核內部究竟經歷了什麼？基於超級電腦進行的高精度磁流體動力學（magnetohydrodynamics）數值模擬顯示，地球發電機在本質上具有混亂且高度非線性的特徵。外核深處的對流渦流有時會偶然激發出與主偶極子方向完全相反的局部磁環。當這些反向磁通量逐漸積累並足夠強大時，主導全球的偶極場便會發生系統性崩潰。但請特別注意：此時磁場強度並不會降至絕對的零點。相反地，主偶極子強度會衰減約 80% 至 90%，並退化為高度複雜且混亂的「多極態構型（multipolar configuration）」——這意味著在過渡時期，地球表面可能會同時散布著數個局部的磁北極與磁南極！這種混亂的過渡態通常會持續一千到一萬年之久，隨後才會逐漸凝聚出全新的穩定雙極磁場——而且其磁極方向往往與原先呈現 180 度徹底對調。" },
+            { sec: 5, head: "課堂問答：輻射威脅、生物圈衝擊與大氣防護韌性", text: "好的，馬庫斯同學，請提問。\n\n學生（馬庫斯）：「教授，如果主偶極場在反轉過渡期衰減了 90%，那致命的太陽風與宇宙射線難道不會灼傷地表嗎？歷史上的地磁反轉是否曾經引發嚴重的物種大滅絕？」\n\n教授：「問得好，馬庫斯！這個滅絕敘事在末日災難科幻小說中極具戲劇張力，但實證古生物學紀錄卻根本無法證實這一點。當演化生物學家將豐富的化石斷層紀錄與已知的古地磁反轉邊界進行交叉比對時，並未發現兩者之間存在統計學上的顯著相關。為什麼呢？原因主要有二。首先，即便在衰減的多極態下，殘留的磁場依然具備相當程度的偏轉能力，能將高能帶電粒子引導至局部的極光帶。第二點更為關鍵：我們濃密的地表大氣層——在輻射阻擋能力上相當於十公尺深的水層或三公尺厚的混凝土——足以吸收絕大部分的次級電離輻射。地球生命在過去數億年間歷經了數十次地磁翻轉，繁衍至今從未中斷。因此，雖然現代的通訊衛星與高壓電網在多極過渡期確實會面臨嚴峻的工程技術挑戰，但地球生物圈本身早已反覆證明了其在對抗地球發電機湍流脈動時所展現出的強大適應韌性。」" }
+        ],
+        answers: [
+            { num: "Q1", ans: "B", type: "Gist-Content", quote: "Today, geophysicists agree: Earth operates not as a static magnet, but as a self-sustaining planetary heat engine known as the geodynamo.", analysis: "演講開篇首先破除「永久磁鐵」的傳統迷思，隨後循序漸進闡述外核液態金屬對流、柯氏力螺旋效應，並在後半段深入探討自發性地磁反轉（reversals）的混沌模擬與生態影響。全篇的核心脈絡即為「地磁場的產生機制及其極性反轉過程」，選項 B 精準命中全文主旨。", trap: "A 選項以局部提及的「太陽輻射」大做文章，且結論已明確反駁大滅絕假說；C 選項捏造「數據與模擬之間的技術爭議」；D 選項偷換為「現代導航系統商業應用」，純屬無關干擾項。" },
+            { num: "Q2", ans: "C", type: "Detail Information", quote: "As the solid inner core slowly freezes and grows, it expels lighter chemical elements... Coriolis force deflects these rising buoyant plumes, twisting them into spiraling, helical columns.", analysis: "考查外核螺旋對流柱形成的雙重物理動力。原聲清晰指出：內核固化結晶排擠輕元素引發成分浮力上升，加上地球自轉所賦予的柯氏偏轉力，兩者耦合促成垂直螺旋柱狀對流，選項 C 詞義完全契合。", trap: "A 項的玄武岩屬於地殼物質，月球引力非主因；B 項放射性衰變主要在地函，地震剪切波無法穿過液態外核；D 項將大氣圈表層壓力與深核流體混淆。" },
+            { num: "Q3", ans: "C", type: "Understanding the Function", quote: "Now, before you start worrying about compasses going haywire tomorrow, let's look at the actual timescale. These geomagnetic reversals are not sudden, overnight switches.", analysis: "教授以口語化的「before you start worrying...」作為言談信號，意在打消大眾常有的心理恐慌，強調地磁反轉並非好萊塢式的「一夕劇變」，而是耗時數千年至上萬年的漫長地質漸進過程。其核心功能在於「澄清常見誤解並引出真實時間尺度」，選項 C 正確。", trap: "A 項指責學生閱讀作業不符教授語氣；B 項渲染全球衛星即刻癱瘓邏輯相反；D 項實驗室安全規則純屬憑空捏造。" },
+            { num: "Q4", ans: "B", type: "Speaker's Attitude", quote: "Well, that catastrophic narrative sounds exciting in apocalyptic sci-fi movies, but the empirical paleontological record simply fails to corroborate it.", analysis: "面對學生提問，教授以「catastrophic narrative in sci-fi」輕微調侃，隨後使用強轉折語「fails to corroborate」直接否定，表明其對該災難假說持明確的懷疑與反駁立場（skeptical），選項 B 正確。", trap: "A 選項「熱情支持」完全相反；C 選項「漠不關心」錯誤解讀教授耐心引用化石與大氣物理論據解答的態度；D 選項「感到困惑」純屬無稽之談。" },
+            { num: "Q5", ans: "Outer: 1, 3 | Inner: 2, 4", type: "Connecting Content", quote: "situated between 2900 and 5100 km... ocean of liquid iron and nickel... solid inner core slowly freezes and grows, it expels lighter elements... Coriolis force twisting them into helical columns.", analysis: "外核（Outer Core）為液態熔融鐵鎳流體，在柯氏力作用下形成螺旋對流線圈，直接產生偶極磁場（陳述 1、3）；內核（Inner Core）因超高壓呈固態鐵鎳球體，隨地球冷卻不斷釋放潛熱並析出輕元素，驅動外核浮力（陳述 2、4）。", trap: "若將內核誤認為液態或將螺旋對流歸於固態內核即會失分。" },
+            { num: "Q6", ans: "B", type: "Making Inferences", quote: "Instead, the dipole intensity weakens by 80 to 90 percent, degenerating into a complex multipolar configuration—meaning you might have multiple North and South poles scattered around the globe!", analysis: "原聲明確指出偶極強度減弱 80%–90% 轉變為具有多個局部磁極的多極態（multipolar configuration），歷時數千年。由此推知，過渡期磁層並未消失，而是退化為結構複雜、強度較弱的非偶極多極形態，選項 B 為正確推論。", trap: "A 選項宣稱「磁層完全消失」屬於極端誇大陷阱；C 選項聲稱「數小時內瞬間翻轉」違背事實；D 選項純屬無端臆測。" }
+        ],
+        vocab: [
+            { w: "Geodynamo", pos: "n.", phon: "/ˌdʒiːəʊˈdaɪnəməʊ/", def: "地球發電機（地核流體對流感應產生磁場之行星物理機制）", col: "self-sustaining geodynamo" },
+            { w: "Convective", pos: "adj.", phon: "/kənˈvektɪv/", def: "對流的；由流體溫差或密度差引發運動的", col: "convective plume / mantle convection" },
+            { w: "Helical", pos: "adj.", phon: "/ˈhelɪkl/", def: "螺旋狀的；沿軸線旋轉前進的", col: "helical column / helical flow" },
+            { w: "Polarity", pos: "n.", phon: "/pəˈlærəti/", def: "極性；磁極方向（南北極之指涉狀態）", col: "polarity reversal / magnetic polarity" },
+            { w: "Solidification", pos: "n.", phon: "/səˌlɪdɪfɪˈkeɪʃn/", def: "固化；凝固結晶過程（如內核鐵鎳結晶）", col: "inner-core solidification" },
+            { w: "Buoyancy", pos: "n.", phon: "/ˈbɔɪənsi/", def: "浮力；流體因密度較低向上浮升之力學特性", col: "compositional buoyancy" },
+            { w: "Multipolar", pos: "adj.", phon: "/ˌmʌltiˈpəʊlə/", def: "多極的；具多個磁極中心的（對比雙極 dipole）", col: "multipolar configuration" },
+            { w: "Corroborate", pos: "v.", phon: "/kəˈrɒbəreɪt/", def: "證實；確證；為...提供有力實證支撐", col: "fail to corroborate the hypothesis" }
+        ],
+        matrix: [
+            ["magnetic field generation engine", "self-sustaining geodynamo heat engine", "【發電機本質】從靜態磁鐵到自持熱力學動態系統映射"],
+            ["spiraling fluid plumes in outer core", "Coriolis force twisting plumes into helical columns", "【流體動力】自轉偏向力促成垂直螺旋柱狀對流"],
+            ["gradual transition over thousands of years", "not sudden overnight switches; spans 1,000 to 10,000 years", "【時間尺度】消除「一夕劇變」迷思，映射漫長地質時代"],
+            ["fails to align with extinction episodes", "fossil record fails to corroborate catastrophic narrative", "【考官態度】否定詞 fails to corroborate 映射客觀反駁立場"],
+            ["complex state with multiple regional poles", "weakens by 90% into a multipolar configuration", "【過渡特徵】主偶極衰退但未歸零，轉化為混亂多極結構"],
+            ["dense atmosphere prevents radiation damage", "shielding capacity equivalent to 10m water or 3m concrete", "【大氣防護】以混凝土與水層物理阻擋比喻生物圈防護力"]
+        ],
+        formulas: [
+            {
+                sent: "Far from acting as a static bar magnet, Earth's deep interior operates as a dynamic geodynamo, wherein the liquid outer core's convective motion, deflected by the planet's rotation, continually regenerates our planetary magnetic shield.",
+                zh: "地球深處絕非一根靜態的條形磁鐵，而是一個動態的地球發電機；其中，液態外核在地球自轉偏向力作用下的對流運動，不斷地再生著保護我們整個行星的磁場防護罩。",
+                formula: "Far from being a mere [直覺表面現象 A], [研究對象 B] functions as [高度複雜的深層系統 C], wherein [核心驅動機制 D], [受外在變數 E 影響之動態修飾], systematically ensures [宏觀系統之持續運作 F].",
+                app: "【托福口說 Task 3 / 課堂學術討論套用範例】\nFar from being a mere passive spectator of tectonic shifts, the oceanic biosphere functions as a dynamic planetary regulator, wherein microbial carbon pump mechanisms, stimulated by hydrothermal vent nutrients, systematically maintain deep-sea biogeochemical equilibrium."
+            },
+            {
+                sent: "While apocalyptic media narratives frequently portray geomagnetic reversals as instantaneous planetary catastrophes that strip away atmospheric protection, rigorous cross-referencing of paleontological fossil archives demonstrates that the biosphere remains remarkably resilient throughout these multi-millennial polarity transitions.",
+                zh: "儘管末日災難題材的媒體報導常將地磁反轉描繪為瞬間剝離大氣保護的行星浩劫，但古生物化石檔案的嚴謹交叉比對卻證明，生物圈在這些長達數千年的極性過渡期間展現出了非凡的適應韌性。",
+                formula: "While popular perception frequently associates [爭議性現象 A] with [直覺性負面後果 B], rigorous empirical investigation of [實證數據來源 C] confirms that [核心主體 D] maintains [高抗風險能力與韌性 E] even amidst [嚴苛之轉型挑戰 F].",
+                app: "【托福學術討論寫作實戰套用範例（Writing for Academic Discussion）】\nWhile popular economic narratives frequently associate rapid artificial intelligence deployment with catastrophic unemployment spikes, rigorous empirical investigation of industrial productivity archives confirms that adaptive labor markets maintain substantial structural resilience through compensatory job creation."
+            }
+        ]
+    },
+    {
+        unit: 2,
+        title: "Martian Paleohydrology and Climate Evolution",
+        chinese: "火星古水文地質學與早期氣候演化",
+        domain: "【第一篇章】自然科學與深地太空",
+        speaker: "Dr. Ava Montgomery (Planetary Geology)",
+        audioUrl: "audio/Unit02_Martian_Paleohydrology.mp3",
+        qrUrl: "qr/QR_Unit02.png",
+        scaffold: [
+            { title: "1. The Faint Young Sun Paradox", cue: "Early Sun 25-30% weaker → Mars should be frozen, but dendritic valley networks prove ancient liquid water." },
+            { title: "2. Atmospheric Greenhouse Forcing", cue: "CO2 insufficient; SO2 and H2 volcanic outgassing provided episodic transient warming pulses." },
+            { title: "3. Jezero Crater Lacustrine Archive", cue: "Deltaic fan deposits and phyllosilicate smectite clays confirm neutral-pH, long-lived lake environment." },
+            { title: "4. Dynamo Shutdown & Stripping", cue: "Loss of core dynamo ~4.0 Ga allowed solar wind to strip atmosphere, driving permanent desiccation." }
+        ],
+        questions: [], script: [], translation: [], answers: [], vocab: [], matrix: [], formulas: []
+    },
+    {
+        unit: 3,
+        title: "Hydrothermal Vents and Chemosynthetic Ecosystems",
+        chinese: "深海熱泉與化學合成生態系統",
+        domain: "【第一篇章】自然科學與深地太空",
+        speaker: "Prof. Guy Sterling (Marine Biology)",
+        audioUrl: "audio/Unit03_Hydrothermal_Vents.mp3",
+        qrUrl: "qr/QR_Unit03.png",
+        scaffold: [
+            { title: "1. Decoupling from Solar Radiation", cue: "Deep abyssal vents operate in total darkness; food webs powered by chemical oxidation, not photosynthesis." },
+            { title: "2. Chemolithoautotrophic Base", cue: "Microbes oxidize H2S, CH4, and Fe2+ from hydrothermal fluids at 350°C to synthesize organic matter." },
+            { title: "3. Riftia Symbiotic Adaptation", cue: "Giant tube worms lack digestive tract; rely on endosymbiotic bacteria inside vascular trophosome." },
+            { title: "4. Astrobiological Implications", cue: "Expands habitability paradigm to icy moons (Europa, Enceladus) with subsurface hydrothermal oceans." }
+        ],
+        questions: [], script: [], translation: [], answers: [], vocab: [], matrix: [], formulas: []
+    },
+    {
+        unit: 4,
+        title: "Jet Streams, Rossby Waves, and Polar Vortices",
+        chinese: "極地急流、羅斯貝波與極渦分裂機制",
+        domain: "【第一篇章】自然科學與深地太空",
+        speaker: "Dr. Aria Kensington (Atmospheric Sciences)",
+        audioUrl: "audio/Unit04_Jet_Streams_and_Polar_Vortices.mp3",
+        qrUrl: "qr/QR_Unit04.png",
+        scaffold: [
+            { title: "1. Thermal Gradient & Jet Velocity", cue: "Tropopause westerly jet driven by thermal contrast between Arctic and mid-latitudes." },
+            { title: "2. Arctic Amplification Mechanism", cue: "Sea-ice loss reduces albedo → Arctic warms 2-3x faster → Equator-to-pole gradient weakens." },
+            { title: "3. Sluggish Rossby Wave Meandering", cue: "Weakened jet stream meanders into high-amplitude planetary waves that become stationary." },
+            { title: "4. Atmospheric Blocking & Extremes", cue: "Persistent ridges cause prolonged heat domes; deep troughs unleash Arctic polar vortex outbreaks." }
+        ],
+        questions: [], script: [], translation: [], answers: [], vocab: [], matrix: [], formulas: []
+    },
+    {
+        unit: 5,
+        title: "The K-Pg Boundary and Volcanic Deccan Traps",
+        chinese: "K-Pg 滅絕邊界：小行星撞擊與德干暗色岩火山假說",
+        domain: "【第二篇章】生命科學與古生物演化",
+        speaker: "Dr. Aria Kensington (Paleontology)",
+        audioUrl: "audio/Unit05_The_KPg_Boundary_Extinction.mp3",
+        qrUrl: "qr/QR_Unit05.png",
+        scaffold: [
+            { title: "1. The Alvarez Iridium Anomaly", cue: "Global iridium spike in thin boundary clay points to extraterrestrial bolide impact ~66 Ma." },
+            { title: "2. Chicxulub Impact Winter", cue: "10 km asteroid crater in Yucatan; vaporized sulfur and soot blocked sunlight, collapsing food webs." },
+            { title: "3. Deccan Traps Volcanic Forcing", cue: "Hundreds of thousands of gigatons of CO2/SO2 outgassing preceded impact, causing severe climate swings." },
+            { title: "4. Press-Pulse Extinction Model", cue: "Deccan volcanism acted as the press (chronic stress); Chicxulub asteroid delivered the finishing pulse." }
+        ],
+        questions: [], script: [], translation: [], answers: [], vocab: [], matrix: [], formulas: []
+    },
+    {
+        unit: 6,
+        title: "Mycorrhizal Networks and Forest Resilience",
+        chinese: "森林地下菌根網絡與植物通訊機制",
+        domain: "【第二篇章】生命科學與古生物演化",
+        speaker: "Dr. Jenny Holbrook (Ecology)",
+        audioUrl: "audio/Unit06_Mycorrhizal_Networks.mp3",
+        qrUrl: "qr/QR_Unit06.png",
+        scaffold: [
+            { title: "1. Symbiotic Exchange Economy", cue: "Fungal hyphae supply mineral P and H2O; tree canopies return photosynthetic carbon sugars." },
+            { title: "2. The 'Wood Wide Web' Architecture", cue: "Common mycorrhizal networks link multiple species; mature mother trees nourish shaded saplings." },
+            { title: "3. Biochemical Pest Signaling", cue: "Infested trees transmit defense cues via mycelium; uninfected neighbors synthesize defensive tannins." },
+            { title: "4. Collective Ecosystem Resilience", cue: "Subterranean resource sharing shifts ecological paradigm from pure competition to mutual aid." }
+        ],
+        questions: [], script: [], translation: [], answers: [], vocab: [], matrix: [], formulas: []
+    },
+    {
+        unit: 7,
+        title: "Corvid Cognition and Metatool Innovation",
+        chinese: "鴉科鳥類認知演化與多階工具製造",
+        domain: "【第二篇章】生命科學與古生物演化",
+        speaker: "Prof. Guy Sterling (Animal Behavior)",
+        audioUrl: "audio/Unit07_Corvid_Cognition.mp3",
+        qrUrl: "qr/QR_Unit07.png",
+        scaffold: [
+            { title: "1. Overturning the 'Birdbrain' Myth", cue: "Crows and ravens match primates in tool manipulation and causal foresight despite lacking neocortex." },
+            { title: "2. Metatool Sequential Problem-Solving", cue: "New Caledonian crows use short tool to reach long tool to extract food; shows mental foresight." },
+            { title: "3. Avian Forebrain Neuronal Density", cue: "Nidopallium contains ultra-dense neuronal packing; forebrain neuron counts rival small monkeys." },
+            { title: "4. Convergent Cognitive Evolution", cue: "Proves complex reasoning and episodic memory can evolve independently via non-mammalian brain structures." }
+        ],
+        questions: [], script: [], translation: [], answers: [], vocab: [], matrix: [], formulas: []
+    },
+    {
+        unit: 8,
+        title: "The Late Bronze Age Collapse and Megadroughts",
+        chinese: "晚期青銅時代文明崩潰與特大乾旱地質紀錄",
+        domain: "【第三篇章】社會科學、歷史與尖端科技",
+        speaker: "Dr. Aria Kensington (Archaeology)",
+        audioUrl: "audio/Unit08_The_Late_Bronze_Age_Collapse.mp3",
+        qrUrl: "qr/QR_Unit08.png",
+        scaffold: [
+            { title: "1. The Globalized Bronze Network", cue: "Intricate diplomatic and trading web connecting Mycenaeans, Hittites, and Egypt ~1200 BCE." },
+            { title: "2. The Multi-Century Megadrought", cue: "Pollen cores and stalagmites reveal severe aridity shock collapsing agricultural surpluses." },
+            { title: "3. Tight Coupling & Systemic Failure", cue: "Over-centralized palace economies lacked resilience; bronze supply chain disruption paralyzed defense." },
+            { title: "4. Sea Peoples as Symptom, Not Cause", cue: "Refugee migrations and raids were consequences of climate crisis, delivering final collapse to fragile states." }
+        ],
+        questions: [], script: [], translation: [], answers: [], vocab: [], matrix: [], formulas: []
+    },
+    {
+        unit: 9,
+        title: "Platform Economics and Network Externalities",
+        chinese: "雙邊平台經濟學與網絡外部性效應",
+        domain: "【第三篇章】社會科學、歷史與尖端科技",
+        speaker: "Prof. Guy Sterling (Microeconomics)",
+        audioUrl: "audio/Unit09_Platform_Economics.mp3",
+        qrUrl: "qr/QR_Unit09.png",
+        scaffold: [
+            { title: "1. Linear Pipeline vs. Multi-Sided Platform", cue: "Platforms act as intermediaries facilitating interactions between two distinct groups (e.g. users and developers)." },
+            { title: "2. Indirect Network Externalities", cue: "Value to users on side A increases exponentially as more developers join side B (positive feedback flywheel)." },
+            { title: "3. Winner-Take-All Market Dynamics", cue: "High switching costs and strong network effects erect barriers to entry, creating natural monopolies." },
+            { title: "4. Antitrust Regulatory Dilemma", cue: "Traditional antitrust focuses on high consumer prices; platforms often subsidize consumers with free services." }
+        ],
+        questions: [], script: [], translation: [], answers: [], vocab: [], matrix: [], formulas: []
+    },
+    {
+        unit: 10,
+        title: "Working Memory Capacity and Cognitive Architecture",
+        chinese: "人類工作記憶容量限制與認知架構模型",
+        domain: "【第三篇章】社會科學、歷史與尖端科技",
+        speaker: "Dr. Jenny Holbrook (Cognitive Psychology)",
+        audioUrl: "audio/Unit10_Working_Memory_Capacity.mp3",
+        qrUrl: "qr/QR_Unit10.png",
+        scaffold: [
+            { title: "1. Baddeley's Multi-Component Model", cue: "Central executive coordinates phonological loop, visuospatial sketchpad, and episodic buffer." },
+            { title: "2. The Narrow 4-Chunk Bottleneck", cue: "Active manipulation capacity limited to ~4 chunks; easily saturated during rapid academic listening." },
+            { title: "3. Cognitive Overload & Comprehension Collapse", cue: "Wasting bandwidth on deciphering words deprives executive controller of macro-discourse synthesis." },
+            { title: "4. Schema Automation & Chunking Solution", cue: "Long-term memory schemas allow grouping complex concepts into single chunks, freeing up processing capacity." }
+        ],
+        questions: [], script: [], translation: [], answers: [], vocab: [], matrix: [], formulas: []
+    }
+];
+
+let currentIdx = 0;
+const audio = document.getElementById('audioPlayer');
+const playBtn = document.getElementById('playBtn');
+const scrubber = document.getElementById('scrubber');
+const currTimeTxt = document.getElementById('currentTime');
+const totalTimeTxt = document.getElementById('totalTime');
+
+function initApp() {
+    renderUnitList();
+    
+    // Parse URL parameter: ?unit=X
+    let initialIdx = 0;
+    const urlParams = new URLSearchParams(window.location.search);
+    const unitParam = urlParams.get('unit');
+    if (unitParam) {
+        const uNum = parseInt(unitParam, 10);
+        const found = UNITS_DATA.findIndex(u => u.unit === uNum);
+        if (found !== -1) initialIdx = found;
+    } else {
+        const hash = window.location.hash.toLowerCase();
+        const match = hash.match(/unit(\d+)/);
+        if (match) {
+            const uNum = parseInt(match[1], 10);
+            const found = UNITS_DATA.findIndex(u => u.unit === uNum);
+            if (found !== -1) initialIdx = found;
+        }
+    }
+    
+    selectUnit(initialIdx, false);
+}
+
+function renderUnitList() {
+    const list = document.getElementById('unitList');
+    list.innerHTML = '';
+    UNITS_DATA.forEach((u, idx) => {
+        const card = document.createElement('div');
+        card.className = `unit-card ${idx === currentIdx ? 'active' : ''}`;
+        card.onclick = () => selectUnit(idx, true);
+        card.innerHTML = `
+            <div class="unit-tag">UNIT 0${u.unit} ‧ ${u.domain.split('】')[1] || u.domain}</div>
+            <div class="unit-name">${u.title}</div>
+            <div class="unit-meta">${u.chinese}</div>
+        `;
+        list.appendChild(card);
+    });
+}
+
+function selectUnit(idx, updateHistory = true) {
+    currentIdx = idx;
+    const data = UNITS_DATA[idx];
+    
+    // Update URL parameter without reload
+    if (updateHistory) {
+        const newUrl = `${window.location.pathname}?unit=${data.unit}`;
+        window.history.pushState({ unit: data.unit }, '', newUrl);
+    }
+    
+    document.title = `Unit 0${data.unit}: ${data.title} ｜ 廷暉英語認知工坊 托福聽力音庫`;
+    document.getElementById('dispTitle').innerText = `Unit 0${data.unit}: ${data.title}`;
+    document.getElementById('dispSpeaker').innerText = `${data.speaker} ｜ ${data.chinese}`;
+    
+    const qrImg = document.getElementById('qrDisplay');
+    qrImg.src = data.qrUrl;
+    
+    const qrLink = document.getElementById('qrDirectLink');
+    const fullLink = `${window.location.origin}${window.location.pathname}?unit=${data.unit}`;
+    qrLink.href = fullLink;
+    qrLink.innerText = fullLink;
+    
+    audio.src = data.audioUrl;
+    audio.load();
+    playBtn.innerText = '▶';
+    
+    // Render Note Scaffold
+    const scafDiv = document.getElementById('dispScaffold');
+    scafDiv.innerHTML = data.scaffold.map(s => `
+        <div class="notes-card">
+            <div class="notes-card-title">▎${s.title}</div>
+            <div>${s.cue}</div>
+        </div>
+    `).join('');
+
+    // Render Questions (Interactive)
+    const qDiv = document.getElementById('dispQuestions');
+    if (data.questions && data.questions.length > 0) {
+        qDiv.innerHTML = data.questions.map(q => `
+            <div class="q-card" id="qBox_${q.num}">
+                <div class="q-title"><span class="q-type-badge">${q.type}</span>Q${q.num}. ${q.stem}</div>
+                <div class="options-group">
+                    ${q.options.map(opt => {
+                        const optLetter = opt.trim()[0];
+                        return `<div class="opt-item" onclick="checkAnswer(${q.num}, '${optLetter}', '${q.correct}', this)">${opt}</div>`;
+                    }).join('')}
+                </div>
+                <div class="ans-feedback" id="fb_${q.num}">
+                    <strong>【官方參考答案：${q.correct}】</strong> 點選 Tab 4「考點定位手術刀」可查看深度干擾項病理診斷！
+                </div>
+            </div>
+        `).join('');
+    } else {
+        qDiv.innerHTML = `
+            <div class="notes-card" style="padding: 16px;">
+                <p>💡 本單元完整 6 題全真測驗、逐字稿與題目詳解收錄於《托福學術聽力破局階梯：旗艦全合輯》中！</p>
+                <p style="margin-top: 6px; color: var(--accent-blue); font-weight: 600;">上方音訊播放器已為您載入全美式學術原聲，請直接點選播放按鈕開始精聽練習。</p>
+            </div>
+        `;
+    }
+
+    // Render Script
+    const sDiv = document.getElementById('dispScript');
+    if (data.script && data.script.length > 0) {
+        sDiv.innerHTML = data.script.map(s => `
+            <div class="script-section">
+                <div class="script-sec-title">▶ Section ${s.sec} ‧ ${s.title}</div>
+                <div class="script-sec-text">${s.text.replace(/\n\n/g, '<br><br>')}</div>
+            </div>
+        `).join('');
+    } else {
+        sDiv.innerHTML = `<p style="color: var(--text-muted);">本單元原聲已載入，逐字稿已印製於實體紙本講義 Page 3–4，建議先盲聽做題再行比對！</p>`;
+    }
+
+    // Render Translation
+    const tDiv = document.getElementById('dispTranslation');
+    if (data.translation && data.translation.length > 0) {
+        tDiv.innerHTML = data.translation.map(t => `
+            <div class="script-section">
+                <div class="script-sec-title">Section ${t.sec} ‧ ${t.head}</div>
+                <div class="script-sec-text">${t.text.replace(/\n\n/g, '<br><br>')}</div>
+            </div>
+        `).join('');
+    } else {
+        tDiv.innerHTML = `<p style="color: var(--text-muted);">本單元繁中精翻收錄於實體講義 Page 5，請對照紙本閱讀！</p>`;
+    }
+
+    // Render Answers
+    const aDiv = document.getElementById('dispAnswers');
+    if (data.answers && data.answers.length > 0) {
+        aDiv.innerHTML = data.answers.map(a => `
+            <div class="ans-card">
+                <div style="margin-bottom: 6px;">
+                    <span class="ans-pill">${a.num}. 【答案：${a.ans}】</span>
+                    <span class="q-type-badge">${a.type}</span>
+                </div>
+                <div style="font-size: 0.85rem; color: #475569; margin-bottom: 6px;"><em>【原聲定位】"${a.quote}"</em></div>
+                <div style="font-size: 0.88rem; margin-bottom: 6px;"><strong>【考點手術刀剖析】</strong>${a.analysis}</div>
+                <div style="font-size: 0.85rem; color: #991B1B;"><strong>【干擾項病理診斷】</strong>${a.trap}</div>
+            </div>
+        `).join('');
+    } else {
+        aDiv.innerHTML = `<p style="color: var(--text-muted);">本單元題目手術刀解析收錄於實體講義 Page 6！</p>`;
+    }
+
+    // Render Vocab
+    const vDiv = document.getElementById('dispVocab');
+    if (data.vocab && data.vocab.length > 0) {
+        vDiv.innerHTML = `
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                ${data.vocab.map(v => `
+                    <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px;">
+                        <div style="font-weight: 800; color: var(--primary-navy);">${v.w} <span style="font-size: 0.75rem; color: #64748B;">(${v.pos}) ${v.phon}</span></div>
+                        <div style="font-size: 0.82rem; color: #334155; margin: 3px 0;">釋義：${v.def}</div>
+                        <div style="font-size: 0.8rem; color: var(--accent-blue); font-weight: 700;">搭配：${v.col}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    } else {
+        vDiv.innerHTML = `<p style="color: var(--text-muted);">本單元詞彙速查表收錄於實體講義 Page 7 與終極附錄一！</p>`;
+    }
+
+    // Render Matrix
+    const mDiv = document.getElementById('dispMatrix');
+    if (data.matrix && data.matrix.length > 0) {
+        mDiv.innerHTML = `
+            <h4 style="color: var(--primary-navy); margin-bottom: 8px;">考官「極限同義替換全真映射矩陣」</h4>
+            <table class="matrix-table">
+                <thead>
+                    <tr>
+                        <th style="width: 33%;">題目 / 選項關鍵詞</th>
+                        <th style="width: 34%;">聽力原聲音訊替換</th>
+                        <th style="width: 33%;">考點替換維度與陷阱</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data.matrix.map(m => `
+                        <tr>
+                            <td style="font-weight: 700; color: #0284C7;">${m[0]}</td>
+                            <td style="font-weight: 700; color: var(--primary-navy);">${m[1]}</td>
+                            <td style="color: #64748B;">${m[2]}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+    } else {
+        mDiv.innerHTML = '';
+    }
+
+    // Render Formulas
+    const fDiv = document.getElementById('dispFormulas');
+    if (data.formulas && data.formulas.length > 0) {
+        fDiv.innerHTML = data.formulas.map((f, i) => `
+            <div class="formula-box">
+                <div class="formula-tag">▍長難句解構 ${i + 1}：</div>
+                <div style="font-weight: 700; color: var(--primary-navy); margin-bottom: 6px;">"${f.sent}"</div>
+                <div style="font-style: italic; color: #475569; margin-bottom: 8px;">【中文精釋】${f.zh}</div>
+                <div style="font-weight: 700; color: var(--accent-sky); margin-top: 8px;">✦ 可遷移學術表達公式：</div>
+                <div style="margin-bottom: 6px;">${f.formula}</div>
+                <div style="font-weight: 700; color: var(--primary-navy); margin-top: 8px;">✦ 實戰套用示範：</div>
+                <div style="font-style: italic; color: #334155;">${f.app.replace(/\n/g, '<br>')}</div>
+            </div>
+        `).join('');
+    } else {
+        fDiv.innerHTML = `<p style="color: var(--text-muted);">本單元長難句可遷移公式收錄於實體講義 Page 8！</p>`;
+    }
+
+    renderUnitList();
+}
+
+function checkAnswer(qNum, selectedLetter, correctLetter, elem) {
+    const parent = elem.closest('.options-group');
+    parent.querySelectorAll('.opt-item').forEach(el => {
+        el.classList.remove('correct', 'incorrect');
+    });
+    
+    if (selectedLetter === correctLetter) {
+        elem.classList.add('correct');
+    } else {
+        elem.classList.add('incorrect');
+        // Highlight correct
+        parent.querySelectorAll('.opt-item').forEach(el => {
+            if (el.innerText.trim().startsWith(correctLetter)) {
+                el.classList.add('correct');
+            }
+        });
+    }
+    
+    const fb = document.getElementById(`fb_${qNum}`);
+    if (fb) fb.style.display = 'block';
+}
+
+function togglePlay() {
+    if (audio.paused) {
+        audio.play();
+        playBtn.innerText = '⏸';
+    } else {
+        audio.pause();
+        playBtn.innerText = '▶';
+    }
+}
+
+function skipTime(sec) {
+    audio.currentTime = Math.max(0, Math.min(audio.duration || 0, audio.currentTime + sec));
+}
+
+function jumpTo(sec) {
+    audio.currentTime = sec;
+    if (audio.paused) togglePlay();
+}
+
+function changeSpeed(val) {
+    audio.playbackRate = parseFloat(val);
+}
+
+function updateProgress() {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    scrubber.value = pct;
+    currTimeTxt.innerText = formatTime(audio.currentTime);
+    totalTimeTxt.innerText = formatTime(audio.duration);
+}
+
+function seekAudio(val) {
+    if (!audio.duration) return;
+    audio.currentTime = (val / 100) * audio.duration;
+}
+
+function onAudioEnded() {
+    playBtn.innerText = '▶';
+}
+
+function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+function switchTab(paneId, btn) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(paneId).classList.add('active');
+    btn.classList.add('active');
+}
+
+window.onpopstate = (event) => {
+    if (event.state && event.state.unit) {
+        const found = UNITS_DATA.findIndex(u => u.unit === event.state.unit);
+        if (found !== -1) selectUnit(found, false);
+    }
+};
+
+window.onload = initApp;
+</script>
+</body>
+</html>
